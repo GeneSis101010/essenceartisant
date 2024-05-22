@@ -1,11 +1,19 @@
-version: '3'
-
+version: "3.8"
+volumes:
+  mysql-volume:
 services:
-###> doctrine/doctrine-bundle ###
-  database:
+  mysql:
+    restart: always
+    image: mysql:8.0.32
+    environment:
+      MYSQL_ROOT_PASSWORD: 'test_pass' # TODO: Change this
+      MYSQL_USER: 'test'
+      MYSQL_PASS: 'pass'
+    volumes:
+      - mysql-volume:/var/lib/mysql
     ports:
-      - "5432"
-###< doctrine/doctrine-bundle ###
+      - "3306:3306"
+
 
 ###> symfony/mailer ###
   mailer:
